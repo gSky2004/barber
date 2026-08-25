@@ -1,0 +1,38 @@
+{
+  "name": "milestone-accessories-api",
+  "version": "1.0.0",
+  "description": "Milestone Accessories REST API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "migrate": "node db/migrate.js",
+    "seed": "node db/seed.js",
+    "db:create": "node db/createDb.js",
+    "db:update-images": "node db/updateImages.js",
+    "db:customers": "node db/migrateCustomers.js",
+    "db:payments": "node db/migratePayments.js",
+    "db:setup": "npm run db:create && npm run migrate && npm run seed && npm run db:customers && npm run db:payments"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@snippe/sdk": "^1.0.0",
+    "axios": "^1.18.1",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^9.0.3",
+    "pg": "^8.22.0",
+    "stripe": "^17.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

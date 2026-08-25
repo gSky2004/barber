@@ -1,0 +1,13 @@
+{
+  "name": "milestone-accessories",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Milestone Accessories — PERN stack website",
+  "scripts": {
+    "dev:client": "npm run dev --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "build:client": "npm run build --prefix client",
+    "db:setup": "npm run db:setup --prefix server",
+    "start:server": "npm start --prefix server"
+  }
+}

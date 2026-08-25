@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #101827;
+  --color-bg-elevated: rgba(255, 255, 255, 0.08);
+  --color-text: #f5f7fb;
+  --color-muted: #a5adc8;
+  --color-primary: #d4af37;
+  --color-primary-light: #f5d36b;
+  --color-accent: #5b8cff;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --font-sans: 'Outfit', system-ui, sans-serif;
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-brand: 'Cinzel', Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .site-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .site-bg__image {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(91, 140, 255, 0.15), transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(212, 175, 55, 0.12), transparent 45%),
+      radial-gradient(ellipse at 50% 50%, rgba(30, 20, 60, 0.8), transparent 70%),
+      linear-gradient(160deg, #080c18 0%, #0f1b33 30%, #14102a 60%, #0c1020 100%);
+  }
+  .site-bg__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(91, 140, 255, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.06), transparent 40%);
+  }
+  .site-content {
+    position: relative;
+    z-index: 1;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-full font-medium transition-all duration-200 cursor-pointer border-0;
+  }
+  .btn:hover {
+    @apply -translate-y-0.5;
+  }
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary-light text-black shadow-lg;
+  }
+  .btn-secondary {
+    @apply bg-white/10 text-text border border-border;
+  }
+  .btn-accent {
+    @apply bg-accent text-white;
+  }
+  .card {
+    @apply bg-black/35 border border-border rounded-2xl p-4 backdrop-blur-md;
+  }
+  .input {
+    @apply w-full px-4 py-3 rounded-xl bg-black/40 border border-border text-text placeholder:text-muted focus:outline-none focus:border-accent transition-colors backdrop-blur-sm;
+  }
+  select.input {
+    color: #f5f7fb;
+    background-color: #1a2332;
+    color-scheme: dark;
+  }
+  select.input option {
+    background-color: #ffffff;
+    color: #111827;
+    padding: 0.5rem;
+  }
+  select.input option:checked,
+  select.input option:hover {
+    background-color: #d4af37;
+    color: #111827;
+  }
+  .label {
+    @apply block text-sm font-medium text-muted mb-1.5;
+  }
+  .section {
+    @apply max-w-screen-2xl mx-auto px-5 sm:px-8 lg:px-12 py-16 md:py-20;
+  }
+  .eyebrow {
+    @apply uppercase tracking-[0.25em] text-primary font-bold text-xs;
+  }
+  .font-brand {
+    font-family: var(--font-brand);
+  }
+  .skeleton {
+    @apply animate-pulse bg-white/10 rounded-xl;
+  }
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+    animation: shimmer-slide 1.4s infinite;
+  }
+  .typing-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    color: var(--color-primary);
+    animation: blink-cursor 0.8s step-end infinite;
+  }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes shimmer-slide {
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .shimmer::after { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
