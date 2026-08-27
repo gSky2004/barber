@@ -439,8 +439,8 @@ export default function Home() {
               <StaggerItem>
                 <motion.div className="card h-full" whileHover={{ y: -4 }}>
                   <h3 className="font-semibold">Phone & WhatsApp</h3>
-                  <a href="tel:+255700000000" className="text-accent text-sm mt-2 block hover:underline">+255 700 000 000</a>
-                  <a href="https://wa.me/255700000000" target="_blank" rel="noopener noreferrer" className="text-accent text-sm block hover:underline">Chat on WhatsApp →</a>
+                  <a href="tel:+255765934051" className="text-accent text-sm mt-2 block hover:underline">+255 765 934 051</a>
+                  <a href="https://wa.me/255765934051" target="_blank" rel="noopener noreferrer" className="text-accent text-sm block hover:underline">Chat on WhatsApp →</a>
                 </motion.div>
               </StaggerItem>
             </Stagger>

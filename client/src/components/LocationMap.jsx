@@ -16,9 +16,9 @@ export default function LocationMap({
           <p className="text-muted text-sm mt-1">{subtitle}</p>
         </div>
         <div className={`flex flex-wrap gap-3 text-sm ${horizontal ? 'mt-3 sm:mt-0' : 'mt-3'}`}>
-          <a href="tel:+255700000000" className="text-accent hover:underline">+255 700 000 000</a>
+          <a href="tel:+255765934051" className="text-accent hover:underline">+255 765 934 051</a>
           <a
-            href="https://wa.me/255700000000"
+            href="https://wa.me/255765934051"
             target="_blank"
             rel="noopener noreferrer"
             className="text-accent hover:underline"

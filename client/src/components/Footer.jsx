@@ -58,11 +58,11 @@ export default function Footer() {
             <p>Mbeya City Centre, Tanzania</p>
             <p>Mon – Sun, 8:00 AM – 9:00 PM</p>
             <p>
-              <a href="tel:+255700000000" className="hover:text-primary transition-colors">+255 700 000 000</a>
+              <a href="tel:+255765934051" className="hover:text-primary transition-colors">+255 765 934 051</a>
             </p>
             <p>
               <a
-                href="https://wa.me/255700000000"
+                href="https://wa.me/255765934051"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary transition-colors"
