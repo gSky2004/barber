@@ -3,17 +3,6 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../api/client';
 
-const tabs = [
-  { to: '/admin', label: 'Overview', end: true },
-  { to: '/admin/bookings', label: 'Bookings' },
-  { to: '/admin/orders', label: 'Orders' },
-  { to: '/admin/products', label: 'Products' },
-  { to: '/admin/gallery', label: 'Gallery' },
-  { to: '/admin/testimonials', label: 'Testimonials' },
-  { to: '/admin/messages', label: 'Messages' },
-  { to: '/admin/audit', label: 'Audit Log' },
-];
-
 function NotificationBell() {
   const [unread, setUnread] = useState(0);
   const [open, setOpen] = useState(false);
@@ -68,7 +57,7 @@ function NotificationBell() {
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-full mt-2 w-80 bg-[#101827] border border-border rounded-xl shadow-2xl z-50 max-h-96 overflow-y-auto">
+          <div className="absolute right-0 top-full mt-2 w-80 bg-[#1b2a44] border border-border rounded-xl shadow-2xl z-50 max-h-96 overflow-y-auto">
             <div className="flex items-center justify-between px-4 py-3 border-b border-border">
               <h3 className="font-semibold text-sm">Notifications</h3>
               {unread > 0 && (
@@ -107,40 +96,74 @@ export default function AdminLayout() {
   };
 
   return (
-    <div className="min-h-screen flex">
-      <aside className="w-56 bg-white/5 border-r border-border p-4 flex flex-col shrink-0">
+    <div className="min-h-screen flex flex-col lg:flex-row">
+      <aside className="hidden lg:flex w-56 bg-white/5 border-r border-border p-4 flex-col shrink-0">
         <h2 className="font-display font-bold text-lg mb-1">
           Admin<span className="text-primary">.</span>
         </h2>
         <p className="text-xs text-muted mb-6">{user?.username}</p>
         <nav className="flex flex-col gap-1 flex-1">
-          {tabs.map((tab) => (
-            <NavLink
-              key={tab.to}
-              to={tab.to}
-              end={tab.end}
-              className={({ isActive }) =>
-                `px-3 py-2 rounded-lg text-sm transition-colors ${
-                  isActive ? 'bg-primary/20 text-primary' : 'text-muted hover:text-text'
-                }`
-              }
-            >
-              {tab.label}
-            </NavLink>
-          ))}
+          <AdminTabList />
         </nav>
         <button onClick={handleLogout} className="btn btn-secondary text-sm mt-4">
           Logout
         </button>
       </aside>
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-14 border-b border-border bg-white/5 backdrop-blur-sm flex items-center justify-end px-6 shrink-0">
+
+      <div className="flex-1 flex flex-col min-w-0">
+        <header className="lg:hidden sticky top-0 z-30 border-b border-border bg-bg/95 backdrop-blur-sm">
+          <div className="flex items-center justify-between px-4 py-3 gap-3">
+            <h2 className="font-display font-bold">
+              Admin<span className="text-primary">.</span>
+            </h2>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted">{user?.username}</span>
+              <button onClick={handleLogout} className="btn btn-secondary text-xs py-1.5 px-3">Logout</button>
+              <NotificationBell />
+            </div>
+          </div>
+          <nav className="flex gap-1 overflow-x-auto px-2 pb-2">
+            <AdminTabList />
+          </nav>
+        </header>
+        <header className="hidden lg:flex h-14 border-b border-border bg-white/5 backdrop-blur-sm items-center justify-end px-6 shrink-0">
           <NotificationBell />
         </header>
-        <main className="flex-1 p-6 overflow-auto">
+        <main className="flex-1 p-4 sm:p-6 overflow-auto">
           <Outlet />
         </main>
       </div>
     </div>
+  );
+}
+
+function AdminTabList() {
+  const tabs = [
+    { to: '/admin', label: 'Overview', end: true },
+    { to: '/admin/bookings', label: 'Bookings' },
+    { to: '/admin/orders', label: 'Orders' },
+    { to: '/admin/products', label: 'Products' },
+    { to: '/admin/gallery', label: 'Gallery' },
+    { to: '/admin/testimonials', label: 'Testimonials' },
+    { to: '/admin/messages', label: 'Messages' },
+    { to: '/admin/audit', label: 'Audit Log' },
+  ];
+  return (
+    <>
+      {tabs.map((tab) => (
+        <NavLink
+          key={tab.to}
+          to={tab.to}
+          end={tab.end}
+          className={({ isActive }) =>
+            `px-3 py-2 rounded-lg text-sm whitespace-nowrap transition-colors ${
+              isActive ? 'bg-primary/20 text-primary' : 'text-muted hover:text-text'
+            }`
+          }
+        >
+          {tab.label}
+        </NavLink>
+      ))}
+    </>
   );
 }

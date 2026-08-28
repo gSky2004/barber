@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../api/client';
 import { formatTZS } from '../utils/format';
+import { useCustomerAuth } from '../context/CustomerAuthContext';
 
 const DEVICE_TYPES = [
   'Smart phone',
@@ -22,6 +23,7 @@ const emptyForm = {
 };
 
 export default function OrderForm({ prefillProduct, onClearPrefill, onTabChange }) {
+  const { requireAuth } = useCustomerAuth();
   const [tab, setTab] = useState('product');
   const [form, setForm] = useState(emptyForm);
   const [products, setProducts] = useState([]);
@@ -63,6 +65,9 @@ export default function OrderForm({ prefillProduct, onClearPrefill, onTabChange 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!requireAuth('Log in or create a free account to place an order or repair request.')) {
+      return;
+    }
     setSubmitting(true);
     setStatus({ type: '', message: '' });
 
@@ -98,7 +103,7 @@ export default function OrderForm({ prefillProduct, onClearPrefill, onTabChange 
           phone: form.phone,
           order_type: 'repair',
           items: [{ name: form.device_type, quantity: 1 }],
-          issue_description: `Device: ${form.device_type}. ${form.issue_description}`,
+          issue_description: form.issue_description,
           delivery_preference: 'pickup',
           total: 0,
         });

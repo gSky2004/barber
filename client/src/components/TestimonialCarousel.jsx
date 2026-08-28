@@ -243,7 +243,7 @@ export default function TestimonialCarousel() {
                 slideRight();
               }}
               disabled={animating}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-black/50 border border-border/70 backdrop-blur-md text-text shadow-lg hover:bg-primary hover:text-black hover:border-primary transition-all flex items-center justify-center disabled:opacity-50"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-[#182337]/80 border border-border/70 backdrop-blur-md text-text shadow-lg hover:bg-primary hover:text-black hover:border-primary transition-all flex items-center justify-center disabled:opacity-50"
               aria-label="Previous testimonials"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -257,7 +257,7 @@ export default function TestimonialCarousel() {
                 slideLeft();
               }}
               disabled={animating}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-black/50 border border-border/70 backdrop-blur-md text-text shadow-lg hover:bg-primary hover:text-black hover:border-primary transition-all flex items-center justify-center disabled:opacity-50"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-[#182337]/80 border border-border/70 backdrop-blur-md text-text shadow-lg hover:bg-primary hover:text-black hover:border-primary transition-all flex items-center justify-center disabled:opacity-50"
               aria-label="Next testimonials"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

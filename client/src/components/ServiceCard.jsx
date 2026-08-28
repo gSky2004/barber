@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ImageReveal from './ImageReveal';
 
+function resolveRoute(ctaLink) {
+  if (!ctaLink || !ctaLink.startsWith('#')) return ctaLink;
+  return ctaLink.replace('#', '/');
+}
+
 export default function ServiceCard({
   image,
   icon,
@@ -10,7 +15,6 @@ export default function ServiceCard({
   price,
   cta,
   ctaLink,
-  onCtaClick,
   index = 0,
 }) {
   const imgSrc = image || icon;
@@ -42,21 +46,12 @@ export default function ServiceCard({
         <p className="text-muted text-sm mt-2 flex-1 leading-relaxed">{description}</p>
         {price && <p className="text-primary font-semibold mt-3 text-sm">{price}</p>}
         {cta && (
-          ctaLink?.startsWith('#') ? (
-            <a
-              href={ctaLink}
-              onClick={onCtaClick ? (e) => onCtaClick(e, ctaLink.slice(1)) : undefined}
-              className="btn btn-secondary text-sm mt-4 self-start"
-            >
-              {cta}
-            </a>
-          ) : (
-            <Link to={ctaLink || '#'} className="btn btn-secondary text-sm mt-4 self-start">
-              {cta}
-            </Link>
-          )
+          <Link to={resolveRoute(ctaLink) || '/'} className="btn btn-secondary text-sm mt-4 self-start">
+            {cta}
+          </Link>
         )}
       </div>
     </motion.div>
   );
 }
+

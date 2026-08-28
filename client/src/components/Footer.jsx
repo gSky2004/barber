@@ -1,32 +1,18 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import BrandMark from './BrandMark';
-import { scrollToSection } from '../utils/scrollTo';
 
 const links = [
-  { id: 'services', label: 'Services' },
-  { id: 'shop', label: 'Shop' },
-  { id: 'gallery', label: 'Gallery' },
-  { id: 'testimonials', label: 'Testimonials' },
-  { id: 'book', label: 'Book Appointment' },
-  { id: 'contact', label: 'Contact' },
+  { path: '/services', label: 'Services' },
+  { path: '/shop', label: 'Shop' },
+  { path: '/gallery', label: 'Gallery' },
+  { path: '/testimonials', label: 'Testimonials' },
+  { path: '/book', label: 'Book Appointment' },
+  { path: '/contact', label: 'Contact' },
 ];
 
 export default function Footer() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const onNav = (e, id) => {
-    e.preventDefault();
-    if (location.pathname !== '/') {
-      navigate(`/#${id}`);
-    } else {
-      scrollToSection(id);
-      window.history.pushState(null, '', `/#${id}`);
-    }
-  };
-
   return (
-    <footer className="border-t border-border mt-20 bg-black/30 backdrop-blur-md">
+    <footer className="border-t border-border mt-20 bg-white/[0.04] backdrop-blur-md">
       <div className="section grid md:grid-cols-3 gap-10 pb-8">
         <div>
           <h3 className="mb-3">
@@ -41,14 +27,13 @@ export default function Footer() {
           <h4 className="font-semibold mb-3">Quick Links</h4>
           <div className="flex flex-col gap-2 text-sm text-muted">
             {links.map((l) => (
-              <a
-                key={l.id}
-                href={`/#${l.id}`}
-                onClick={(e) => onNav(e, l.id)}
+              <Link
+                key={l.path}
+                to={l.path}
                 className="hover:text-text transition-colors"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

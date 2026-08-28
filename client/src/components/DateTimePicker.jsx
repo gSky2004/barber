@@ -93,7 +93,7 @@ export default function DateTimePicker({ date, time, onDateChange, onTimeChange,
       <button
         type="button"
         onClick={() => { setOpen(!open); setStep(date ? 'time' : 'date'); }}
-        className={`w-full px-4 py-3 rounded-xl bg-black/40 border text-left text-sm transition-colors backdrop-blur-sm ${
+        className={`w-full px-4 py-3 rounded-xl bg-white/[0.08] border text-left text-sm transition-colors backdrop-blur-sm ${
           date || time ? 'border-primary/40 text-text' : 'border-border text-muted'
         }`}
       >
@@ -107,7 +107,7 @@ export default function DateTimePicker({ date, time, onDateChange, onTimeChange,
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.96 }}
             transition={{ duration: 0.2 }}
-            className="absolute left-0 right-0 mt-2 z-50 bg-[#141c2b] border border-border rounded-2xl shadow-2xl overflow-hidden"
+            className="absolute left-0 right-0 mt-2 z-50 bg-[#1e2c49] border border-border rounded-2xl shadow-2xl overflow-hidden"
           >
             {/* Tabs */}
             <div className="flex border-b border-border">

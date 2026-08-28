@@ -19,6 +19,7 @@ export default function ProductCard({ product, onOrderClick, index = 0 }) {
   const { customer, isLoggedIn, openAuth } = useCustomerAuth();
   const [toast, setToast] = useState('');
   const [buying, setBuying] = useState(false);
+  const [failed, setFailed] = useState(false);
   const from = index % 2 === 0 ? 'left' : 'right';
 
   const img =
@@ -26,8 +27,14 @@ export default function ProductCard({ product, onOrderClick, index = 0 }) {
       ? product.image_url
       : fallbackImages[product.category] || images.products.charger;
 
+  if (failed) return null;
+
   const handleAdd = async () => {
     if (String(product.id).startsWith('feat-')) {
+      return;
+    }
+    if (!isLoggedIn) {
+      openAuth('login', 'Log in or create an account to add items to your cart.');
       return;
     }
     const result = await addToCart(product, 1);
@@ -111,6 +118,7 @@ export default function ProductCard({ product, onOrderClick, index = 0 }) {
           delay={(index % 4) * 0.05}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           wrapperClassName="absolute inset-0"
+          onError={() => setFailed(true)}
         />
       </div>
       <div className="p-4">

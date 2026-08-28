@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import api from '../api/client';
 import { BOOKING_SERVICES, GAMING_DURATIONS } from '../utils/format';
 import DateTimePicker from './DateTimePicker';
+import { useCustomerAuth } from '../context/CustomerAuthContext';
 
 export default function BookForm() {
+  const { requireAuth } = useCustomerAuth();
   const [tab, setTab] = useState('barber');
   const [form, setForm] = useState({
     name: '', phone: '', date: '', time: '', service: 'haircut', duration: '1', players: '1',
@@ -23,6 +25,9 @@ export default function BookForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!requireAuth('Log in or create a free account to book an appointment.')) {
+      return;
+    }
     setSubmitting(true);
     setStatus({ type: '', message: '' });
 

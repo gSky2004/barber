@@ -27,7 +27,7 @@ function StatCard({ label, value, sub, color }) {
 function ChartTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-[#101827] border border-white/10 rounded-lg px-3 py-2 text-sm shadow-lg">
+    <div className="bg-[#1b2a44] border border-white/10 rounded-lg px-3 py-2 text-sm shadow-lg">
       <p className="text-muted text-xs mb-1">{label}</p>
       {payload.map((p, i) => (
         <p key={i} style={{ color: p.color }} className="font-medium">

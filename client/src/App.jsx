@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CustomerAuthProvider } from './context/CustomerAuthContext';
 import { CartProvider } from './context/CartContext';
@@ -11,9 +11,16 @@ import ScrollProgress from './components/ScrollProgress';
 import SiteBackground from './components/SiteBackground';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Skeleton } from './components/Skeleton';
-import { useHashScroll } from './hooks/useHashScroll';
 
 const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const Shop = lazy(() => import('./pages/Shop'));
+const Gallery = lazy(() => import('./pages/Gallery'));
+const Testimonials = lazy(() => import('./pages/Testimonials'));
+const Book = lazy(() => import('./pages/Book'));
+const Order = lazy(() => import('./pages/Order'));
+const Contact = lazy(() => import('./pages/Contact'));
 const CheckoutPay = lazy(() => import('./pages/CheckoutPay'));
 const PayCallback = lazy(() => import('./pages/PayCallback'));
 const Receipt = lazy(() => import('./pages/Receipt'));
@@ -36,9 +43,12 @@ function PageLoader() {
   );
 }
 
-function HashRedirect({ to }) {
-  useHashScroll();
-  return <Navigate to={to} replace />;
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [pathname]);
+  return null;
 }
 
 function AppRoutes() {
@@ -51,18 +61,21 @@ function AppRoutes() {
       <div className={isAdmin ? undefined : 'site-content'}>
       {!isAdmin && <Navbar />}
       {!isAdmin && <ScrollProgress />}
+      <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/book" element={<Book />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/pay/:sessionId" element={<CheckoutPay />} />
           <Route path="/pay/:sessionId/callback" element={<PayCallback />} />
           <Route path="/receipt/:orderId" element={<Receipt />} />
-          <Route path="/services" element={<HashRedirect to="/#services" />} />
-          <Route path="/shop" element={<HashRedirect to="/#shop" />} />
-          <Route path="/gallery" element={<HashRedirect to="/#gallery" />} />
-          <Route path="/book" element={<HashRedirect to="/#book" />} />
-          <Route path="/order" element={<HashRedirect to="/#order" />} />
-          <Route path="/contact" element={<HashRedirect to="/#contact" />} />
 
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={
